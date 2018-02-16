@@ -12,7 +12,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 var Ride = require('../models/Ride');
 
 // Register new ride
-router.post('/', function (req, res) {
+router.post('/', VerifyToken, function (req, res) {
     Ride.create({
             name : req.body.name,
             rideNumber : req.body.number,
@@ -25,24 +25,24 @@ router.post('/', function (req, res) {
 });
 
 // get all rides
-router.get('/', function (req, res) {
-    Ride.find({}, function (err, rides) {
+router.get('/', VerifyToken, function (req, res) {
+    Ride.find({'status': 0}, function (err, rides) {
         if (err) return res.status(500).send("There was a problem finding the rides.");
         res.status(200).send(rides);
     });
 });
 
-// get ride
-router.get('/:id', function (req, res) {
+// get ride status
+router.get('/:id', VerifyToken, function (req, res) {
     Ride.findById(req.params.id, function (err, ride) {
         if (err) return res.status(500).send("There was a problem finding the ride.");
         if (!ride) return res.status(404).send("No ride found.");
-        res.status(200).send(ride);
+        res.status(200).send('ride-status:' + ride.status);
     });
 });
 
 // delete ride
-router.delete('/:id', function (req, res) {
+router.delete('/:id', VerifyToken, function (req, res) {
     Ride.findByIdAndRemove(req.params.id, function (err, ride) {
         if (err) return res.status(500).send("There was a problem deleting the ride.");
         res.status(200).send("Rider: "+ ride.name +" was deleted.");
@@ -50,8 +50,7 @@ router.delete('/:id', function (req, res) {
 });
 
 // Update ride data
-// Added VerifyToken middleware to make sure only an authenticated user can put to this route
-router.put('/:id', function (req, res) {
+router.put('/:id', VerifyToken, function (req, res) {
     Ride.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, ride) {
         if (err) return res.status(500).send("There was a problem updating the ride.");
         res.status(200).send(ride);

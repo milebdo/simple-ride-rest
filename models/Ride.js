@@ -9,6 +9,7 @@ var RideSchema = new mongoose.Schema({
     rideNumber: String,
     rideType: String, // car, bike
     status: { type: Number, default: 0 }, // 0: idle, 1: picked, 2: cancled
+    statusDescription: String,
 });
 
 mongoose.model('Rides', RideSchema);
