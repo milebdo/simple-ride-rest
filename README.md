@@ -17,16 +17,19 @@
       - `POST /api/auth/register` to register new user, and will return the `token`
       - `GET /api/auth/login` to handle the login process, and will return `token`
       - `GET /api/auth/logout` to logout and reset the token
+      
    b. User, this api for view, update data, and delete the registered user*
       - `GET /api/user/` to get all users
       - `GET /api/user/:id` to get specific user
       - `PUT /api/user/:id` to update user data
       - `DELETE /api/user/:id` to delete user
+      
    c. Ride, this api for crud (regiter new ride, update, delete and view) ride*
       - `GET /api/ride/` to get all rides
       - `GET /api/ride/:id` to get specific ride
       - `PUT /api/ride/:id` to update ride data
       - `DELETE /api/ride/:id` to delete ride
+      
    d. Transaction, this api for log every request or transaction between customer and rider*
       - `GET /api/transaction/` to get all transactions
       - `GET /api/transaction/:id` to get specific transaction
