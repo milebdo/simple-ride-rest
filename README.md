@@ -32,7 +32,7 @@
       - `GET /api/transaction/:id` to get specific transaction
       - `PUT /api/transaction/:id` to update transaction data (status)
 
-   *( note : put `x-access-token` into header for send the token
+   )* note : put `x-access-token` into header for send the token
 
 ### this code can be run and test:
 
